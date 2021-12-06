@@ -2,11 +2,11 @@ const Project = require('../models/Project');
 
 module.exports = {
     list: async function(){
-        const projects = await Project.find().populate('category');
+        const projects = await Project.find().populate('category services');
         return projects;
     },
     get: async function(id){
-       const project = await Project.findOne({_id: id}).populate('category');
+       const project = await Project.findOne({_id: id}).populate('category services');
        return project;
     },
     post: async function(project){
@@ -15,7 +15,7 @@ module.exports = {
         return project;
     },
     put: async function(project){
-       await Project.updateOne({_id: project._id}, project);
+       project = await Project.updateOne({_id: project._id}, project);
        return project;
     }, 
     remove: async function(id) {

@@ -33,9 +33,9 @@ module.exports = {
                 
                 const project = ProjectBuilder.build(_id, name, budget, cost, category, services);
                 
-                await service.post(project);
+                const resp = await service.post(project);
                 
-                res.status(201).json({message: 'Project successfully created!'});
+                res.status(201).json(resp);
             } catch (error) {
                 res.status(500).json({error: error});
             }
@@ -45,11 +45,11 @@ module.exports = {
             try {
                 const ProjectBuilder = require('../builder/Project.builder');
                 const {_id, name, budget, cost, category, services} = req.body;
-                
                 const project = ProjectBuilder.build(_id, name, budget, cost, category, services);
+
+                const resp = await service.put(project);
                
-                await service.put(project);
-                res.status(200).json({message: 'Project successfully updated!'});
+                res.status(200).json(resp);
             } catch (error) {
                 res.status(500).json({error: error});
             }

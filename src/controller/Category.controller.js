@@ -28,8 +28,8 @@ module.exports = {
         server.post('/graphicapi/categories', async (req, res) => {
             const { category } = req.body;
             try {
-                await service.post(category);
-                res.status(201).json({message: 'Category successfully created!'});
+                category = await service.post(category);
+                res.status(201).json(category);
             } catch (error) {
                 res.status(500).json({error: error});
             }
@@ -38,8 +38,8 @@ module.exports = {
         server.put('/graphicapi/categories', async (req, res) => {
             const { category } = req.body;
             try {
-                await service.put(category);
-                res.status(200).json({message: 'Category successfully updated!'});
+                category = await service.put(category);
+                res.status(200).json(category);
             } catch (error) {
                 res.status(500).json({error: error});
             }

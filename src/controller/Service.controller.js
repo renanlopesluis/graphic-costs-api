@@ -15,12 +15,12 @@ module.exports = {
         server.get('/graphicapi/services/:id', async (req, res) => {
             try {
                 const { id } = req.params;
-                const service = await service.get(id);
-                if(!service){
+                const response = await service.get(id);
+                if(!response){
                     res.status(404).json({message: 'Service not found!'});
                     return;
                 }
-                res.status(200).json(service);
+                res.status(200).json(response);
             } catch (error) {
                 res.status(500).json({error: error});
             }
@@ -30,10 +30,11 @@ module.exports = {
             try {
                 const ServiceBuilder = require('../builder/Service.builder');
                 const {_id, name, description, cost} = req.body;
-
-                await service.post(ServiceBuilder.build(_id, name, description, cost));
-
-                res.status(201).json({message: 'Service successfully created!'});
+                const request = ServiceBuilder.build(_id, name, description, cost);
+                
+                const response = await service.post(request);
+            
+                res.status(201).json(response);
             } catch (error) {
                 res.status(500).json({error: error});
             }
@@ -43,8 +44,11 @@ module.exports = {
             try {
                 const ServiceBuilder = require('../builder/Service.builder');
                 const {_id, name, description, cost} = req.body;
-                await service.put(ServiceBuilder.build(_id, name, description, cost));
-                res.status(200).json({message: 'Service successfully updated!'});
+                const request = ServiceBuilder.build(_id, name, description, cost);
+               
+                const response = await service.put(request);
+               
+                res.status(200).json(response);
             } catch (error) {
                 res.status(500).json({error: error});
             }
