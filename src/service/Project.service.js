@@ -10,7 +10,6 @@ module.exports = {
        return project;
     },
     post: async function(project){
-        console.log(project);
         project = await Project.create(project);
         return project;
     },
