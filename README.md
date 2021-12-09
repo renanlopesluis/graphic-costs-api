@@ -1,5 +1,4 @@
 # graphic-costs-api
-<br/>
 **Api RESTFUL for React Application Graphic Costs**
 
 **Main Features**
