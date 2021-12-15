@@ -7,7 +7,7 @@ function AuthenticationException(message) {
 
 module.exports = {
     generateCryptedPassword: async function(password){
-        const salt = bcrypt.genSalt(12);
+        const salt = await bcrypt.genSalt(12);
         const passwordHash = await bcrypt.hash(password, salt);
         return passwordHash;
     },

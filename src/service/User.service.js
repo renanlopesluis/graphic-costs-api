@@ -23,9 +23,9 @@ module.exports = {
        return user;
     },
     post: async function(user){
-        UserValidation.validate(user, existentUser);
         const existentUser = User.findOne({email: user.email});
-        UserValidation.userExists(existentUser);
+       // UserValidation.validate(user);
+       // UserValidation.userExists(existentUser);
 
         user.password = await AuthService.generateCryptedPassword(user.password);
         

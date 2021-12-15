@@ -4,5 +4,12 @@ module.exports = {
             user: user,
             expiresIn: expiresIn
         }
+    },
+
+    buildResponse(token){
+        return {
+            id: token._id,
+            expiresIn: token.expiresIn
+        }
     }
 }

@@ -23,6 +23,6 @@ module.exports = {
         const user = await UserService.get(userId);
         UserValidation.checkIfUserExist(user);
         const newToken = await RefreshToken.create(RefreshTokenBuilder.build(user,expiresIn));
-        return newToken;
+        return RefreshTokenBuilder.buildResponse(newToken);
     }
 }

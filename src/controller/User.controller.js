@@ -62,10 +62,11 @@ module.exports = {
             }
         });
 
-        server.get('/graphicapi/auth/refresh-token', async (req, res) => {
+        server.get('/graphicapi/auth/refresh-token/:id', async (req, res) => {
             const { id } = req.params;
+            console.log(id)
             try {
-                const token = tokenService.refreshToken(id);
+                const token = await tokenService.refreshToken(id);
                 res.status(200).json({message: 'User successfully logged', token});
             } catch (error) {
                 res.status(401).json({error: `Unauthorized Access: ${error}`});
