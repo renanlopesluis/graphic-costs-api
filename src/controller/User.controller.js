@@ -1,6 +1,7 @@
 module.exports = {
     api: function (srv) {
         const userService = require('../service/User.service');
+        const tokenService = require('../service/Token.service');
 
         const server = srv; ;
         
@@ -11,7 +12,6 @@ module.exports = {
                 return res.status(401).json({message: 'Access denied!'});
             }
             try {
-                const tokenService = require('../service/Token.service');
                 tokenService.checkToken(token);
                 next();
             } catch (error) {
@@ -32,7 +32,6 @@ module.exports = {
                 res.status(500).json({error: error});
             }
         });
-
 
         server.post('/graphicapi/auth/register', async (req, res) => {
             const {name, email, password, confirmPassword} = req.body;
@@ -60,6 +59,16 @@ module.exports = {
                     res.status(404).json({error: error}) 
                 }
                 res.status(500).json({error: error});
+            }
+        });
+
+        server.get('/graphicapi/auth/refresh-token', async (req, res) => {
+            const { id } = req.params;
+            try {
+                const token = tokenService.refreshToken(id);
+                res.status(200).json({message: 'User successfully logged', token});
+            } catch (error) {
+                res.status(401).json({error: `Unauthorized Access: ${error}`});
             }
         });
     }

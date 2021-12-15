@@ -44,7 +44,7 @@ function userExists(user){
     }
 }
 
-function userNotExist(user){
+function checkIfUserExist(user){
     if(!user){
         throw new UserNotFoundException("User not found on our database!")
     }
@@ -62,8 +62,8 @@ module.exports = {
     userExists: function(user){
         userExists(user);
     },
-    userNotExist: function(user){
-        userNotExist(user);
+    checkIfUserExist: function(user){
+        checkIfUserExist(user);
     },
     validateLogin(email, password){
         validateEmail(email);

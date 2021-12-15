@@ -13,7 +13,7 @@ module.exports = {
     login: async function(email, password){
         UserValidation.validateLogin(email, password);
         const existentUser = User.findOne({email: user.email});
-        UserValidation.userNotExist(existentUser);
+        UserValidation.checkIfUserExist(existentUser);
         
         return AuthService.authenticate(user, password);
           
